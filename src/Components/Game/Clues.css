@@ -1,0 +1,20 @@
+@keyframes floatAnimation {
+    0%, 100% {
+      transform: translateY(2px);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+}
+
+.floaty {
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.unsolved {
+  opacity: 1;
+}

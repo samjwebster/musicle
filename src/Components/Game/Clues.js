@@ -1,5 +1,5 @@
 import './Clues.css';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { loadEmptyConfig } from '../../Services/gameService';
 
 // Function to generate a random delay within the specified range
@@ -33,103 +33,94 @@ let floatToPercentage = (input) => {
     return Math.round(input * 100, 3) + "%";
 }
 
-const Clues = (config)  => {
-    const [gameConfig, setGameConfig] = useState(loadEmptyConfig());
-    // setGameConfig(loadEmptyConfig());
-
-    useEffect(() => {
-        setGameConfig(config);
-    }, [loadEmptyConfig()]);
-
+const Clues = ({config})  => {
     return (
-        <div className="hero mt-24">
-            <div className="hero-content text-center glass rounded-xl flex flex-row justify-between w-[80vw] h-[50vh]">
-                <div className="flex flex-col w-[50%]">
-                    <div className="flex flex-col glass rounded-lg p-4 bg-primary">
-                        <div className="text-left text-3xl text-primary-content font-extrabold unsolved">
-                            Title: {strToQuestionMarkSpan(gameConfig.config.song.title)}
-                        </div>
-                        <div class="flex flex-row justify-between">
-                            <div className="text-left text-lg text-primary-content font-bold unsolved w-[50%]">
-                                Album: {strToQuestionMarkSpan(gameConfig.config.song.album.album)}
-                            </div>
-                            <div className="text-left text-lg text-primary-content font-bold unsolved w-[50%]">
-                                Release Date: {strToQuestionMarkSpan(gameConfig.config.song.release_date)}
-                            </div>
-                        </div>
+        
+        <div className="p-2 mx-2 w-[100%] text-center glass rounded-xl flex flex-col justify-between">
+            <div className="flex flex-col w-[100%]">
+                <div className="flex flex-col glass rounded-lg py-2 px-4 bg-primary">
+                    <div className="text-left text-2xl text-primary-content font-extrabold unsolved">
+                        Title: {strToQuestionMarkSpan(config.song.title)}
                     </div>
-                    
-                    <div className="flex flex-col glass rounded-lg p-4 mt-2 bg-secondary h-[25vh]">
-                        <div className="text-left text-lg text-secondary-content font-bold">
-                            Artists:
+                    <div className="flex flex-row justify-between">
+                        <div className="text-left text-md text-primary-content font-bold unsolved w-full">
+                            Album: {strToQuestionMarkSpan(config.song.album.album)}
                         </div>
-                        <div className="overflow-y-auto">
-                            {gameConfig.config.song.artists.map((artist, index) => (
-                                <div key={index} className="text-left text-md text-secondary-content unsolved glass p-2 my-2 rounded-lg font-bold">
-                                    Name: {strToQuestionMarkSpan(artist.artist)}
-                                    <br/>
-                                    Genres:
-                                    
-                                    {artist.genres.map((genre, index) => (
-                                        <div key={index} className="unsolved badge mx-1 badge-secondary">
-                                            {strToQuestionMarkSpan(genre)}
-                                        </div>
-                                    ))}                        
-                                </div>
-                        ))}
+                        <div className="text-left text-md text-primary-content font-bold unsolved w-full">
+                            Release Date: {strToQuestionMarkSpan(config.song.release_date)}
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col glass rounded-lg p-4 bg-accent w-[50%] text-accent-content">
+                
+                <div className="flex flex-col glass rounded-lg py-2 px-4 mt-2 bg-secondary h-[20vh]">
+                    <div className="text-left text-sm text-secondary-content font-bold">
+                        Artists:
+                    </div>
+                    <div className="overflow-y-auto">
+                        {config.song.artists.map((artist, index) => (
+                            <div key={index} className="text-left text-md text-secondary-content unsolved glass p-2 my-2 rounded-lg font-bold">
+                                {strToQuestionMarkSpan(artist.artist)}
+                                <br/>
+                                {artist.genres.map((genre, index) => (
+                                    <div key={index} className="unsolved badge mx-1 badge-secondary">
+                                        {strToQuestionMarkSpan(genre)}
+                                    </div>
+                                ))}                        
+                            </div>
+                    ))}
+                    </div>
+                </div>
+
+                <div className="flex flex-col glass rounded-lg my-2 py-2 px-4 h-content bg-accent w-full text-accent-content">
                     <div className="font-extrabold">
                         Audio Features:
                     </div>
                     <div className="flex flex-row justify-evenly">
-                    <table class="table">
+                    <table className="table text-sm">
                         <tbody>
                             <tr>
                                 <th>Danceability</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.danceability))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.danceability))}</th>
                             </tr>
                             <tr>
                                 <th>Energy</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.energy))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.energy))}</th>
                             </tr>
                             <tr>
                                 <th>Loudness</th>
-                                <th>{strToQuestionMarkSpan(gameConfig.config.song.loudness)} dB</th>
+                                <th>{strToQuestionMarkSpan(config.song.loudness)} dB</th>
                             </tr>
                             <tr>   
                                 <th>Mode</th>
-                                <th>{strToQuestionMarkSpan(gameConfig.config.song.mode === 1 ? "Major" : "Minor")}</th>
+                                <th>{strToQuestionMarkSpan(config.song.mode === 1 ? "Major" : "Minor")}</th>
                             </tr>
                             <tr>   
                                 <th>Speechiness</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.speechiness))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.speechiness))}</th>
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table">
+                    <table className="table text-sm">
                         <tbody>
                             <tr>   
                                 <th>Acousticness</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.acousticness))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.acousticness))}</th>
                             </tr>
                             <tr>   
                                 <th>Instrumentalness</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.instrumentalness))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.instrumentalness))}</th>
                             </tr>
                             <tr>
                                 <th>Liveness</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.liveness))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.liveness))}</th>
                             </tr>
                             <tr>
                                 <th>Valence</th>
-                                <th>{strToQuestionMarkSpan(floatToPercentage(gameConfig.config.song.valence))}</th>
+                                <th>{strToQuestionMarkSpan(floatToPercentage(config.song.valence))}</th>
                             </tr>
                             <tr>
-                                <th>Tempo</th>
-                                <th>{strToQuestionMarkSpan(gameConfig.config.song.tempo)} BPM</th>
+                                <th>Tempo (BPM)</th>
+                                <th>{strToQuestionMarkSpan(config.song.tempo)}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -142,4 +133,4 @@ const Clues = (config)  => {
 
 }
 
-export default Clues
+export default Clues;

@@ -29,7 +29,7 @@ export const isAuth = () => {
 }
 
 export const getUserData = () => {
-    if(isAuth(true)) {
+    if(isAuth()) {
         return JSON.parse(localStorage.getItem('currentUser'));
     }
 }

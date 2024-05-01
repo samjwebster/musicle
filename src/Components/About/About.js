@@ -24,6 +24,13 @@ const About = () => {
                     </div>
 
                     <div className="glass bg-neutral p-4 m-4 rounded-xl w-[100%]">
+                        <div className="text-xl font-bold text-primary">What technology does the Musicle site use?</div>
+                        <div className="mt-4 text-neutral-content text-justify text-md">
+                            Musicle is built in React and is styled using Tailwind CSS and DaisyUI. The site was designed for a zoom of 100% and a landscape orientation. On mobile or other zoom levels, it may not look as intended. 
+                        </div>
+                    </div>
+
+                    <div className="glass bg-neutral p-4 m-4 rounded-xl w-[100%]">
                         <div className="text-xl font-bold text-primary">What data does Musicle use?</div>
                         <div className="mt-4 text-neutral-content text-justify text-md">
                             Musicle's data is collected from the Spotify API. Currently, there are over 640,000 songs by more than 29,000 different artists available for play in the Musicle database. 
@@ -87,11 +94,6 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-
-
-
-
-            
                 </div>
             </div>
         </div>

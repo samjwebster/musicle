@@ -47,10 +47,16 @@ const RankingsRow = ({ rank, name, value, isUser }) => {
             <div>{name}</div>
             <div className="text-right">{value}</div>
         </div>
+
+        // <tr>
+        //     <th>{rank}</th>
+        //     <td>{name}</td>
+        //     <td>{value}</td>
+        // </tr>
     );
 }
 
-const RankingsList = ({ title, desc, rankings }) => {
+const RankingsList = ({ title, desc, rankings, unit }) => {
     let playerRanking = false;
     if(rankings.length > 10) {
         playerRanking = rankings[10];
@@ -58,27 +64,59 @@ const RankingsList = ({ title, desc, rankings }) => {
     }
 
     return (
-        <div className="hero mt-16">
-            <div className="hero-content text-center glass rounded-xl flex flex-col">
-                <div className="max-w-md text-3xl text-primary font-extrabold">
-                    {title}
-                </div>
-                <div className="max-w-md text-lg">
-                    {desc}
-                </div>
-                <ol className="min-w-96">
-                    {rankings.map((ranking, index) => (
-                    <RankingsRow key={index} rank={ranking.rank} name={ranking.username} value={ranking.streak} isUser={ranking.isUser}/>
-                    ))}
-                    {playerRanking ? (
-                        <div className="p-0 m-0 flex flex-col">
-                            <div className="divider divider-neutral my-0"></div>
-                            <RankingsRow rank={playerRanking.rank} name={playerRanking.username} value={playerRanking.streak} isUser={playerRanking.isUser}/>
-                        </div>
-                    ) : null}
-                </ol>
+        <div className="p-2 m-2 text-center glass rounded-xl flex flex-col">
+            <div className="max-w-md text-lg text-primary font-extrabold">
+                {title}
             </div>
+            <div className="max-w-md text-md w-[25vw]">
+                {desc}
+            </div>
+            <ol className="w-[25vw]">
+                {rankings.map((ranking, index) => (
+                <RankingsRow key={index} rank={ranking.rank} name={ranking.username} value={ranking.value} isUser={ranking.isUser}/>
+                ))}
+                {playerRanking ? (
+                    <div className="p-0 m-0 flex flex-col">
+                        <div className="divider divider-neutral my-0"></div>
+                        <RankingsRow rank={playerRanking.rank} name={playerRanking.username} value={playerRanking.value} isUser={playerRanking.isUser}/>
+                    </div>
+                ) : null}
+            </ol>
         </div>
+
+        // <div className="p-2 m-2 rounded-xl flex flex-col w-[25vw] bg-red-600">
+        //     <div className="text-primary font-bold text-lg">{title}</div>
+        //     <div className="text-md">{desc}</div>
+        //     <div className="overflow-x-auto">
+        //     <table className="table text-center">
+        //         {/* head */}
+        //         <thead>
+        //         <tr>
+        //             <th></th>
+        //             <th>Username</th>
+        //             <th>{unit}</th>
+        //         </tr>
+        //         </thead>
+        //         <tbody>
+        //         {rankings.map((ranking, index) => (
+        //             <RankingsRow key={index} rank={ranking.rank} name={ranking.username} value={ranking.value} isUser={ranking.isUser}/>
+        //         ))}
+        //         </tbody>
+        //     </table>
+        //     {playerRanking ? (
+        //         <div>
+        //             <div className="divider divider-neutral my-0"></div>
+        //             <table className="table text-center">
+        //                 <tbody>
+        //                     <RankingsRow rank={playerRanking.rank} name={playerRanking.username} value={playerRanking.value} isUser={playerRanking.isUser}/>
+        //                 </tbody>
+        //             </table>
+        //         </div>
+        //         ) : null}
+
+
+        //     </div>
+        // </div>
     );
 }
 
